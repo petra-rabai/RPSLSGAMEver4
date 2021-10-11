@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="gameAvailableItems" xml:space="preserve">
+    <value>Choose an item: \nPaper - P\nScissor - S\nRock - R\nLizard - L\nSpock -V\n</value>
+  </data>
+  <data name="gameItemsEqualMessage" xml:space="preserve">
+    <value>Both identities are equal\n</value>
+  </data>
+  <data name="gameRulesMessage" xml:space="preserve">
+    <value>The Game rules: \nScissors cuts Paper\nPaper covers Rock\nRock crushes Lizard\nLizard poisons Spock\nSpock smashes Scissors\nScissors decapitates Lizard\nLizard eats Paper\nPaper disproves Spock\nSpock vaporizes Rock\nRock crushes Scissors\n</value>
+  </data>
+  <data name="gameSavedDataFileName" xml:space="preserve">
+    <value>GameResult.txt</value>
+  </data>
+  <data name="gameTitle" xml:space="preserve">
+    <value>RPSLS GAME</value>
+  </data>
+  <data name="gameWelcomeMessage" xml:space="preserve">
+    <value>Welcome to the RPSLS Game\nRock, Paper, Scissor, Lizard, Spock\nIf you need to read the game rules hit the H key\nHit the E key to start the game or hit the Q key to quit the game\n"</value>
+  </data>
+  <data name="machineChoosedOtionMessage" xml:space="preserve">
+    <value>\nThe machine choosed:</value>
+  </data>
+  <data name="machinePointMessage" xml:space="preserve">
+    <value>\nMachine point:</value>
+  </data>
+  <data name="playerAddNameMessage" xml:space="preserve">
+    <value>Add your name: </value>
+  </data>
+  <data name="playerChoosedOptionMessage" xml:space="preserve">
+    <value>\nYou are choosed:</value>
+  </data>
+  <data name="playerGameFinalizeNavigationMessage" xml:space="preserve">
+    <value>\nIf you want a new game hit the E key \nIf you want to quit hit the Q key\n</value>
+  </data>
+  <data name="playerGameRulesNavigationMessage" xml:space="preserve">
+    <value>If you want to go back to the main screen hit the B key\n If you want to quit the game hit the Q key\n</value>
+  </data>
+  <data name="playerGameSaveResultNavigationMessage" xml:space="preserve">
+    <value>\nIf you want to save the result hit the C key\nIf you want to exit the game without save hit the Q key\n</value>
+  </data>
+  <data name="playerHitValidKeyMessage" xml:space="preserve">
+    <value>\nPlease hit a valid key: \n</value>
+  </data>
+  <data name="playerLoseMessage" xml:space="preserve">
+    <value>You are LOSE! :(\nThe winner is:</value>
+  </data>
+  <data name="playerNameMessage" xml:space="preserve">
+    <value>\nPlayer name:</value>
+  </data>
+  <data name="playerPointMessage" xml:space="preserve">
+    <value>\nPlayer point:</value>
+  </data>
+  <data name="playerWaitForInputMessage" xml:space="preserve">
+    <value>\nWait for player input: </value>
+  </data>
+  <data name="playerWinMessage" xml:space="preserve">
+    <value>You are WIN! :)\nThe winner is:</value>
+  </data>
+</root>

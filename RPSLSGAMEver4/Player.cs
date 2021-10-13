@@ -10,14 +10,16 @@ namespace RPSLSGAMEver4
     {
         private string playerName = "";
         private string playerChoosedGameMenu = "";
-        public int playerPoint;
+        private int playerPoint;
         private char playerPressedkey;
-        public string playerChoosedOption = "";
+        private string playerChoosedGameItem = "";
         readonly GameBoard game = new GameBoard();
 
         public string PlayerName { get => playerName; set => playerName = value; }
         public string PlayerChoosedGameMenu { get => playerChoosedGameMenu; set => playerChoosedGameMenu = value; }
         public char PlayerPressedkey { get => playerPressedkey; set => playerPressedkey = value; }
+        public string PlayerChoosedGameItem { get => playerChoosedGameItem; set => playerChoosedGameItem = value; }
+        public int PlayerPoint { get => playerPoint; set => playerPoint = value; }
 
         public char GetPlayerKey()
         {
@@ -67,6 +69,12 @@ namespace RPSLSGAMEver4
         {
             playerChoosedGameMenu = game.GameMenu[PlayerPressedkey];
             return PlayerChoosedGameMenu;
+        }
+
+        public string GetChoosedPlayerGameItem()
+        {
+            playerChoosedGameItem = game.GameItems[PlayerPressedkey];
+            return PlayerChoosedGameItem;
         }
     }
 }

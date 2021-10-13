@@ -47,8 +47,24 @@ namespace RPSLSGAMEver4
 
         public void GameMenuNavigation()
         {
+            player.GetChoosedPlayerMenu();
             switch (player.PlayerChoosedGameMenu)
             {
+                case "Start the Game":
+                    //
+                    break;
+                case "Game Help":
+                    //
+                    break;
+                case "Back to the Menu":
+                    //
+                    break;
+                case "Save the Result":
+                    //
+                    break;
+                case "Quit the Game":
+                    //
+                    break;
                 default:
                     break;
             }

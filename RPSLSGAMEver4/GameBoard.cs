@@ -45,6 +45,14 @@ namespace RPSLSGAMEver4
         public Dictionary<char, string> GameMenu { get => gameMenu; set => gameMenu = value; }
         public Dictionary<char, string> GameItems { get => gameItems; set => gameItems = value; }
 
+        public void GameWelcomeScreenInitialize()
+        {
+            Console.Title = Properties.Resources.gameTitle;
+            Console.WriteLine(Properties.Resources.gameWelcomeMessage
+                              + "\n"
+                              + Properties.Resources.playerWaitForInputMessage);
+        }
+        
         public void GameMenuNavigation()
         {
             player.GetChoosedPlayerMenu();

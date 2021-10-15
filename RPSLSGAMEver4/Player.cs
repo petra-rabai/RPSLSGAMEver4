@@ -34,6 +34,12 @@ namespace RPSLSGAMEver4
             return PlayerPressedkey;
         }
 
+        public int GetPlayerPoint()
+        {
+            playerPoint = 0;
+            return PlayerPoint;
+        }
+
         public string GetPlayerName()
         {
             Console.WriteLine(Properties.Resources.playerAddNameMessage);

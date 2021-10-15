@@ -9,6 +9,7 @@ namespace RPSLSGAMEver4
     public class GameBoard
     {
         readonly Player player = new Player();
+        readonly Machine machine = new Machine();
 
         public string gameResultTimeStamp = DateTime.Now.ToString("\n MM/dd/yyyy h:mm tt\n");
 
@@ -51,6 +52,9 @@ namespace RPSLSGAMEver4
             Console.WriteLine(Properties.Resources.gameWelcomeMessage
                               + "\n"
                               + Properties.Resources.playerWaitForInputMessage);
+            player.GetPlayerKey();
+            player.GetChoosedPlayerMenu();
+            GameMenuNavigation();
         }
         
         public void GameMenuNavigation()
@@ -60,22 +64,58 @@ namespace RPSLSGAMEver4
             {
                 case "Start the Game":
                     //
+                    Console.WriteLine(Properties.Resources.gameAvailableItems);
+                    player.GetPlayerPoint();
+                    machine.GetMachinePoint();
+                    player.GetPlayerKey();
+                    machine.GetMachineKey();
+                    player.GetChoosedPlayerGameItem();
+                    machine.GetChoosedMachineGameItem();
+                    GameItemsEqualityCheck();
+                    gameCompareChoosedItems = new Tuple<string, string>(player.PlayerChoosedGameItem, machine.MachineChoosedGameItem);
                     break;
                 case "Game Help":
-                    //
+                    GameHelp();
                     break;
                 case "Back to the Menu":
-                    //
+                    GameWelcomeScreenInitialize();
                     break;
                 case "Save the Result":
                     //
                     break;
                 case "Quit the Game":
-                    //
+                    GameExit();
                     break;
                 default:
                     break;
             }
+        }
+
+        public void GameItemsEqualityCheck()
+        {
+            if (player.PlayerChoosedGameItem == machine.MachineChoosedGameItem)
+            {
+                Console.WriteLine(Properties.Resources.gameItemsEqualMessage);
+                player.NotifyPalyerToAnInvalidAction();
+                player.GetPlayerKey();
+                machine.GetMachineKey();
+                player.GetChoosedPlayerGameItem();
+                machine.GetChoosedMachineGameItem();
+            }
+        }
+
+        public void GameHelp()
+        {
+            Console.WriteLine(Properties.Resources.gameRulesMessage);
+            Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
+            player.GetPlayerKey();
+            player.GetChoosedPlayerMenu();
+            GameMenuNavigation();
+        }
+
+        public void GameExit()
+        {
+            Environment.Exit(0);
         }
     }
 }

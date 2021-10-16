@@ -5,12 +5,6 @@ namespace RPSLSGAMETESTS
 {
     public class PlayerTests
     {
-        [SetUp]
-        public void Setup()
-        {
-            
-        }
-
         [TestCase('E', "Start the Game")]
         [TestCase('B', "Back to the Menu")]
         [TestCase('C', "Save the Result")]
@@ -51,6 +45,27 @@ namespace RPSLSGAMETESTS
             Player player = new Player();
 
             player.SetPlayerWaitForMessage();
+
+            Assert.Pass("Success");
+        }
+
+        [Test]
+        public void CheckSetPlayerNameMessageSuccess()
+        {
+            Player player = new Player();
+
+            player.SetPlayerNameMessage();
+
+            Assert.Pass("Success");
+        }
+
+        [Test]
+        public void CheckNotifyPalyerToAnInvalidActionSuccess()
+        {
+            Player player = new Player();
+            GameBoard game = new GameBoard();
+
+            player.NotifyPalyerToAnInvalidAction(game);
 
             Assert.Pass("Success");
         }

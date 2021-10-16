@@ -148,13 +148,10 @@
     <value>\nYou are choosed:</value>
   </data>
   <data name="playerGameFinalizeNavigationMessage" xml:space="preserve">
-    <value>\nIf you want a new game hit the E key \nIf you want to quit hit the Q key\n</value>
+    <value>\nIf you want to save the result hit the C key\nIf you want to start a new game without save the result hit the E key\nIf you want to exit the game without save hit the Q key\n</value>
   </data>
   <data name="playerGameRulesNavigationMessage" xml:space="preserve">
     <value>If you want to go back to the main screen hit the B key\n If you want to quit the game hit the Q key\n</value>
-  </data>
-  <data name="playerGameSaveResultNavigationMessage" xml:space="preserve">
-    <value>\nIf you want to save the result hit the C key\nIf you want to exit the game without save hit the Q key\n</value>
   </data>
   <data name="playerHitValidKeyMessage" xml:space="preserve">
     <value>\nPlease hit a valid key: \n</value>

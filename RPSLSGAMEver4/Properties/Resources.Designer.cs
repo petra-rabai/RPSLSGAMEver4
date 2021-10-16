@@ -151,7 +151,7 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nIf you want a new game hit the E key \nIf you want to quit hit the Q key\n.
+        ///   Looks up a localized string similar to \nIf you want to save the result hit the C key\nIf you want to start a new game without save the result hit the E key\nIf you want to exit the game without save hit the Q key\n.
         /// </summary>
         public static string playerGameFinalizeNavigationMessage {
             get {
@@ -165,15 +165,6 @@ namespace RPSLSGAMEver4.Properties {
         public static string playerGameRulesNavigationMessage {
             get {
                 return ResourceManager.GetString("playerGameRulesNavigationMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to \nIf you want to save the result hit the C key\nIf you want to exit the game without save hit the Q key\n.
-        /// </summary>
-        public static string playerGameSaveResultNavigationMessage {
-            get {
-                return ResourceManager.GetString("playerGameSaveResultNavigationMessage", resourceCulture);
             }
         }
         

@@ -23,7 +23,7 @@ namespace RPSLSGAMEver4
 
         public char GetPlayerKey()
         {
-            Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
+            SetPlayerWaitForMessage();
             ReadKeyboard();
             while ((!game.GameMenu.ContainsKey(PlayerPressedkey)) && (!game.GameItems.ContainsKey(PlayerPressedkey)))
             {
@@ -34,6 +34,11 @@ namespace RPSLSGAMEver4
             return PlayerPressedkey;
         }
 
+        public void SetPlayerWaitForMessage()
+        {
+            Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
+        }
+
         public int GetPlayerPoint()
         {
             playerPoint = 0;
@@ -42,11 +47,21 @@ namespace RPSLSGAMEver4
 
         public string GetPlayerName()
         {
-            Console.WriteLine(Properties.Resources.playerAddNameMessage);
-            Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
-            playerName = Console.ReadLine();
+            SetPlayerNameMessage();
+            SetPlayerWaitForMessage();
+            ReadPlayerNameFromTheConsole();
 
             return PlayerName;
+        }
+
+        public void ReadPlayerNameFromTheConsole()
+        {
+            playerName = Console.ReadLine();
+        }
+
+        public void SetPlayerNameMessage()
+        {
+            Console.WriteLine(Properties.Resources.playerAddNameMessage);
         }
 
         public void ReadKeyboard()
@@ -68,7 +83,7 @@ namespace RPSLSGAMEver4
                 Console.WriteLine(gameItempair.Key + " - " + gameItempair.Value + "\n");
             }
 
-            Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
+            SetPlayerWaitForMessage();
         }
 
         public string GetChoosedPlayerMenu()

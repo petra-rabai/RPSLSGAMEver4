@@ -50,15 +50,12 @@ namespace RPSLSGAMEver4
 
         private Dictionary<Tuple<string, string>, string> gameWinner = new Dictionary<Tuple<string, string>, string>();
 
-       
-
         public void GameWelcomeScreenInitialize(Player player, Machine machine, GameBoard game)
         {
             SetGameTitle();
             SetGameWelcomeMessage();
             SetPlayerWaitForInputMessage();
             SetPlayerKey(player,game);
-            SetChoosedPlayerMenu(player,game);
             GameMenuNavigation(player,machine,game);
         }
 
@@ -70,6 +67,21 @@ namespace RPSLSGAMEver4
         public void SetGameWelcomeMessage()
         {
             Console.WriteLine(Properties.Resources.gameWelcomeMessage);
+        }
+
+        public void SetPlayerWaitForInputMessage()
+        {
+            Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
+        }
+
+        public void SetPlayerKey(Player player, GameBoard game)
+        {
+            player.GetPlayerKey(game);
+        }
+
+        public void SetChoosedPlayerMenu(Player player, GameBoard game)
+        {
+            player.GetChoosedPlayerMenu(game);
         }
 
         public void GameMenuNavigation(Player player, Machine machine, GameBoard game)
@@ -97,15 +109,167 @@ namespace RPSLSGAMEver4
             }
         }
 
+        public void GameCore(Player player, Machine machine, GameBoard game)
+        {
+            SetGameAvailableItems();
+            SetPlayerPoint(player);
+            SetMachinePoint(machine);
+            SetPlayerKey(player, game);
+            SetMachineKey(machine, game);
+            SetPlayerGameItem(player, game);
+            SetMachineGameItem(machine, game);
+            GameItemsEqualityCheck(player, machine, game);
+            SetGameCompareItems(player, machine);
+            GameRulesCheck(player, machine, GameCompareChoosedItems.Item1, GameCompareChoosedItems.Item2);
+            GameShowTheResult(player, machine);
+            GameFinalize(player, machine, game);
+        }
+
+        public void SetGameAvailableItems()
+        {
+            Console.WriteLine(Properties.Resources.gameAvailableItems);
+        }
+
+        public void SetPlayerPoint(Player player)
+        {
+            player.GetPlayerPoint();
+        }
+
+        public void SetMachinePoint(Machine machine)
+        {
+            machine.GetMachinePoint();
+        }
+
+        public void SetMachineKey(Machine machine, GameBoard game)
+        {
+            machine.GetMachineKey(game);
+        }
+
+        public void SetPlayerGameItem(Player player, GameBoard game)
+        {
+            player.GetChoosedPlayerGameItem(game);
+        }
+
+        public void SetMachineGameItem(Machine machine, GameBoard game)
+        {
+            machine.GetChoosedMachineGameItem(game);
+        }
+
+        public void GameItemsEqualityCheck(Player player, Machine machine, GameBoard game)
+        {
+            if (player.PlayerChoosedGameItem == machine.MachineChoosedGameItem)
+            {
+                SetGameItemsEqualMessage();
+                SetPlayerInvalidAction(player, game);
+                SetPlayerKey(player, game);
+                SetMachineKey(machine, game);
+                SetPlayerGameItem(player, game);
+                SetMachineGameItem(machine, game);
+            }
+        }
+
+        public void SetGameItemsEqualMessage()
+        {
+            Console.WriteLine(Properties.Resources.gameItemsEqualMessage);
+        }
+
+        public void SetPlayerInvalidAction(Player player, GameBoard game)
+        {
+            player.NotifyPalyerToAnInvalidAction(game);
+        }
+
+        public void SetGameCompareItems(Player player, Machine machine)
+        {
+            gameCompareChoosedItems = new Tuple<string, string>(player.PlayerChoosedGameItem, machine.MachineChoosedGameItem);
+        }
+
+        public void GameRulesCheck(Player player, Machine machine, string optionOne, string optionTwo)
+        {
+
+            if (optionOne == GameCompareChoosedItems.Item1 && optionTwo == GameCompareChoosedItems.Item2)
+            {
+                gameWinner.Add(GameCompareChoosedItems, optionOne);
+                player.PlayerPoint++;
+            }
+            else if (optionOne == GameCompareChoosedItems.Item2 && optionTwo == GameCompareChoosedItems.Item1)
+            {
+                gameWinner.Add(GameCompareChoosedItems, optionOne);
+                machine.MachinePoint++;
+            }
+        }
+
+        public void GameShowTheResult(Player player, Machine machine)
+        {
+            if (player.PlayerPoint > machine.MachinePoint)
+            {
+                SetPlayerWinMessage(player, machine);
+            }
+            else
+            {
+                SetMachineWinMessage(player, machine);
+            }
+        }
+
+        public void SetPlayerWinMessage(Player player, Machine machine)
+        {
+            Console.WriteLine(Properties.Resources.playerWinMessage
+                                              + gameWinner[GameCompareChoosedItems]
+                                              + Properties.Resources.playerPointMessage
+                                              + player.PlayerPoint
+                                              + Properties.Resources.playerChoosedOptionMessage
+                                              + player.PlayerChoosedGameItem
+                                              + Properties.Resources.machineChoosedOtionMessage
+                                              + machine.MachineChoosedGameItem);
+        }
+
+        public void SetMachineWinMessage(Player player, Machine machine)
+        {
+            Console.WriteLine(Properties.Resources.playerLoseMessage
+                                              + gameWinner[GameCompareChoosedItems]
+                                              + Properties.Resources.machinePointMessage
+                                              + machine.MachinePoint
+                                              + Properties.Resources.playerChoosedOptionMessage
+                                              + player.PlayerChoosedGameItem
+                                              + Properties.Resources.machineChoosedOtionMessage
+                                              + machine.MachineChoosedGameItem);
+        }
+
+        public void GameFinalize(Player player, Machine machine, GameBoard game)
+        {
+            SetGameFinalizeMenuNavigationMessage();
+            SetPlayerWaitForInputMessage();
+            SetPlayerKey(player, game);
+            GameMenuNavigation(player, machine, game);
+        }
+
+        public void SetGameFinalizeMenuNavigationMessage()
+        {
+            Console.WriteLine(Properties.Resources.playerGameFinalizeNavigationMessage);
+        }
+
         public void GameSaveing(Player player, Machine machine)
         {
-            GameCheckSaveDirectoryExsits();
             SetPlayerName(player);
             SaveTheResultToFile(player,machine);
         }
 
+        public void GameCheckSaveDirectoryExsits()
+        {
+            GameDirectoryExists = Directory.Exists(GameResultDirectory);
+            if (!GameDirectoryExists)
+            {
+                Directory.CreateDirectory(GameResultDirectory);
+            }
+        }
+
+        public void SetPlayerName(Player player)
+        {
+            player.GetPlayerName();
+        }
+
         public void SaveTheResultToFile(Player player, Machine machine)
         {
+            GameCheckSaveDirectoryExsits();
             GameResult = GameResultTimeStamp
                                              + Properties.Resources.playerNameMessage
                                              + player.PlayerName
@@ -122,163 +286,6 @@ namespace RPSLSGAMEver4
             File.AppendAllText(gameResultFullPath, GameResult);
         }
 
-        public void SetPlayerName(Player player)
-        {
-            player.GetPlayerName();
-        }
-
-        public void GameCheckSaveDirectoryExsits()
-        {
-            GameDirectoryExists = Directory.Exists(GameResultDirectory);
-            if (!GameDirectoryExists)
-            {
-                Directory.CreateDirectory(GameResultDirectory);
-            }
-        }
-
-        public void GameCore(Player player, Machine machine, GameBoard game)
-        {
-            SetGameAvailableItems();
-            SetPlayerPoint(player);
-            SetMachinePoint(machine);
-            SetPlayerKey(player,game);
-            SetMachineKey(machine,game);
-            SetPlayerGameItem(player,game);
-            SetMachineGameItem(machine,game);
-            GameItemsEqualityCheck(player,machine,game);
-            SetGameCompareItems(player,machine);
-            GameRulesCheck(player,machine,GameCompareChoosedItems.Item1, GameCompareChoosedItems.Item2);
-            GameShowTheResult(player,machine);
-            GameFinalize(player,machine,game);
-        }
-
-        public void GameFinalize(Player player,Machine machine, GameBoard game)
-        {
-            SetGameFinalizeMenuNavigationMessage();
-            SetPlayerWaitForInputMessage();
-            SetPlayerKey(player,game);
-            GameMenuNavigation(player, machine,game);
-        }
-
-        public void SetGameFinalizeMenuNavigationMessage()
-        {
-            Console.WriteLine(Properties.Resources.playerGameFinalizeNavigationMessage);
-        }
-
-        public void GameShowTheResult(Player player, Machine machine)
-        {
-            if (player.PlayerPoint > machine.MachinePoint)
-            {
-                SetPlayerWinMessage(player,machine);
-            }
-            else
-            {
-                SetMachineWinMessage(player,machine);
-            }
-        }
-
-        public void SetMachineWinMessage(Player player, Machine machine)
-        {
-            Console.WriteLine(Properties.Resources.playerLoseMessage
-                                              + gameWinner[GameCompareChoosedItems]
-                                              + Properties.Resources.machinePointMessage
-                                              + machine.MachinePoint
-                                              + Properties.Resources.playerChoosedOptionMessage
-                                              + player.PlayerChoosedGameItem
-                                              + Properties.Resources.machineChoosedOtionMessage
-                                              + machine.MachineChoosedGameItem);
-        }
-
-        public void SetPlayerWinMessage(Player player, Machine machine)
-        {
-            Console.WriteLine(Properties.Resources.playerWinMessage
-                                              + gameWinner[GameCompareChoosedItems]
-                                              + Properties.Resources.playerPointMessage
-                                              + player.PlayerPoint
-                                              + Properties.Resources.playerChoosedOptionMessage
-                                              + player.PlayerChoosedGameItem
-                                              + Properties.Resources.machineChoosedOtionMessage
-                                              + machine.MachineChoosedGameItem);
-        }
-
-        public void GameRulesCheck(Player player, Machine machine, string optionOne, string optionTwo)
-        {
-            
-            if (optionOne == GameCompareChoosedItems.Item1 && optionTwo == GameCompareChoosedItems.Item2)
-            {
-                gameWinner.Add(GameCompareChoosedItems, optionOne);
-                player.PlayerPoint++;
-            }
-            else if (optionOne == GameCompareChoosedItems.Item2 && optionTwo == GameCompareChoosedItems.Item1)
-            {
-                gameWinner.Add(GameCompareChoosedItems, optionOne);
-                machine.MachinePoint++;
-            }
-        }
-
-        public void SetGameCompareItems(Player player, Machine machine)
-        {
-            gameCompareChoosedItems = new Tuple<string, string>(player.PlayerChoosedGameItem, machine.MachineChoosedGameItem);
-        }
-
-        public void SetGameAvailableItems()
-        {
-            Console.WriteLine(Properties.Resources.gameAvailableItems);
-        }
-
-        public void SetMachineGameItem(Machine machine, GameBoard game)
-        {
-            machine.GetChoosedMachineGameItem(game);
-        }
-
-        public void SetPlayerGameItem(Player player, GameBoard game)
-        {
-            player.GetChoosedPlayerGameItem(game);
-        }
-
-        public void SetMachineKey(Machine machine, GameBoard game)
-        {
-            machine.GetMachineKey(game);
-        }
-
-        public void SetPlayerKey(Player player, GameBoard game)
-        {
-            player.GetPlayerKey(game);
-        }
-
-        public void SetMachinePoint(Machine machine)
-        {
-            machine.GetMachinePoint();
-        }
-
-        public void SetPlayerPoint(Player player)
-        {
-            player.GetPlayerPoint();
-        }
-
-        public void GameItemsEqualityCheck(Player player, Machine machine, GameBoard game)
-        {
-            if (player.PlayerChoosedGameItem == machine.MachineChoosedGameItem)
-            {
-                SetGameItemsEqualMessage();
-                SetPlayerInvalidAction(player,game);
-                SetPlayerKey(player,game);
-                SetMachineKey(machine,game);
-                SetPlayerGameItem(player,game);
-                SetMachineGameItem(machine,game);
-            }
-        }
-
-        public void SetGameItemsEqualMessage()
-        {
-            Console.WriteLine(Properties.Resources.gameItemsEqualMessage);
-        }
-
-        public void SetPlayerInvalidAction(Player player, GameBoard game)
-        {
-            player.NotifyPalyerToAnInvalidAction(game);
-        }
-
         public void GameHelp(Player player,Machine machine, GameBoard game)
         {
             SetGameRulesMessage();
@@ -291,16 +298,6 @@ namespace RPSLSGAMEver4
         public void SetGameRulesMessage()
         {
             Console.WriteLine(Properties.Resources.gameRulesMessage);
-        }
-
-        public void SetPlayerWaitForInputMessage()
-        {
-            Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
-        }
-
-        public void SetChoosedPlayerMenu(Player player, GameBoard game)
-        {
-            player.GetChoosedPlayerMenu(game);
         }
 
         public void GameExit()

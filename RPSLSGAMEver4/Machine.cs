@@ -8,16 +8,16 @@ namespace RPSLSGAMEver4
 {
     public class Machine
     {
-        private char machinePressedkey;
-        private int machinePoint;
-        private string machineChoosedGameItem = "";
-        readonly GameBoard game = new GameBoard();
 
         public char MachinePressedkey { get => machinePressedkey; set => machinePressedkey = value; }
         public int MachinePoint { get => machinePoint; set => machinePoint = value; }
         public string MachineChoosedGameItem { get => machineChoosedGameItem; set => machineChoosedGameItem = value; }
 
-        public char GetMachineKey()
+        private char machinePressedkey;
+        private int machinePoint;
+        private string machineChoosedGameItem;
+
+        public char GetMachineKey(GameBoard game)
         {
             Random choose = new Random();
             int chooseHelper = choose.Next(game.GameItems.Count);
@@ -27,7 +27,7 @@ namespace RPSLSGAMEver4
             return MachinePressedkey;
         }
 
-        public string GetChoosedMachineGameItem()
+        public string GetChoosedMachineGameItem(GameBoard game)
         {
             machineChoosedGameItem = game.GameItems[MachinePressedkey];
             return MachineChoosedGameItem;

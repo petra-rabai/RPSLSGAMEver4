@@ -10,8 +10,10 @@ namespace RPSLSGAMEver4
     {
         static void Main(string[] args)
         {
-            GameBoard gameBoard = new GameBoard();
-            gameBoard.GameWelcomeScreenInitialize();
+            GameBoard game = new GameBoard();
+            Player player = new Player();
+            Machine machine = new Machine();
+            game.GameWelcomeScreenInitialize(player,machine,game);
         }
     }
 }

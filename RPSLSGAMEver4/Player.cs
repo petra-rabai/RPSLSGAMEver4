@@ -8,26 +8,25 @@ namespace RPSLSGAMEver4
 {
     public class Player
     {
-        private string playerName = "";
-        private string playerChoosedGameMenu = "";
-        private int playerPoint;
-        private char playerPressedkey;
-        private string playerChoosedGameItem = "";
-        readonly GameBoard game = new GameBoard();
-
         public string PlayerName { get => playerName; set => playerName = value; }
         public string PlayerChoosedGameMenu { get => playerChoosedGameMenu; set => playerChoosedGameMenu = value; }
         public char PlayerPressedkey { get => playerPressedkey; set => playerPressedkey = value; }
         public string PlayerChoosedGameItem { get => playerChoosedGameItem; set => playerChoosedGameItem = value; }
         public int PlayerPoint { get => playerPoint; set => playerPoint = value; }
 
-        public char GetPlayerKey()
+        private string playerName;
+        private string playerChoosedGameMenu;
+        private int playerPoint;
+        private char playerPressedkey;
+        private string playerChoosedGameItem;
+
+        public char GetPlayerKey(GameBoard game)
         {
             SetPlayerWaitForMessage();
             ReadKeyboard();
             while ((!game.GameMenu.ContainsKey(PlayerPressedkey)) && (!game.GameItems.ContainsKey(PlayerPressedkey)))
             {
-                NotifyPalyerToAnInvalidAction();
+                NotifyPalyerToAnInvalidAction(game);
                 ReadKeyboard();
             }
 
@@ -70,7 +69,7 @@ namespace RPSLSGAMEver4
             PlayerPressedkey = Char.Parse(Hitkey.Key.ToString());
         }
 
-        public void NotifyPalyerToAnInvalidAction()
+        public void NotifyPalyerToAnInvalidAction(GameBoard game)
         {
             Console.WriteLine(Properties.Resources.playerHitValidKeyMessage);
 
@@ -86,13 +85,13 @@ namespace RPSLSGAMEver4
             SetPlayerWaitForMessage();
         }
 
-        public string GetChoosedPlayerMenu()
+        public string GetChoosedPlayerMenu(GameBoard game)
         {
             playerChoosedGameMenu = game.GameMenu[PlayerPressedkey];
             return PlayerChoosedGameMenu;
         }
 
-        public string GetChoosedPlayerGameItem()
+        public string GetChoosedPlayerGameItem(GameBoard game)
         {
             playerChoosedGameItem = game.GameItems[PlayerPressedkey];
             return PlayerChoosedGameItem;

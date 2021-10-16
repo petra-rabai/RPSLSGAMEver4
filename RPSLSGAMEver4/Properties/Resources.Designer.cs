@@ -61,7 +61,12 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose an item: \nPaper - P\nScissor - S\nRock - R\nLizard - L\nSpock -V\n.
+        ///   Looks up a localized string similar to Choose an item:
+        ///Paper - P
+        ///Scissor - S
+        ///Rock - R
+        ///Lizard - L
+        ///Spock -V.
         /// </summary>
         public static string gameAvailableItems {
             get {
@@ -70,7 +75,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Both identities are equal\n.
+        ///   Looks up a localized string similar to Both identities are equal
+        ///.
         /// </summary>
         public static string gameItemsEqualMessage {
             get {

@@ -118,10 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="gameAvailableItems" xml:space="preserve">
-    <value>Choose an item: \nPaper - P\nScissor - S\nRock - R\nLizard - L\nSpock -V\n</value>
+    <value>Choose an item:
+Paper - P
+Scissor - S
+Rock - R
+Lizard - L
+Spock -V</value>
   </data>
   <data name="gameItemsEqualMessage" xml:space="preserve">
-    <value>Both identities are equal\n</value>
+    <value>Both identities are equal
+</value>
   </data>
   <data name="gameRulesMessage" xml:space="preserve">
     <value>The Game rules: \nScissors cuts Paper\nPaper covers Rock\nRock crushes Lizard\nLizard poisons Spock\nSpock smashes Scissors\nScissors decapitates Lizard\nLizard eats Paper\nPaper disproves Spock\nSpock vaporizes Rock\nRock crushes Scissors\n</value>

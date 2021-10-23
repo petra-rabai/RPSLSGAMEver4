@@ -26,7 +26,7 @@ namespace RPSLSGAMETESTS
         {
             GameBoard game = new GameBoard();
 
-            game.SetGameWelcomeMessage();
+            game.WriteGameWelcomeMessage();
 
             Assert.Pass("Success");
         }
@@ -36,7 +36,7 @@ namespace RPSLSGAMETESTS
         {
             GameBoard game = new GameBoard();
 
-            game.SetPlayerWaitForInputMessage();
+            game.WritePlayerWaitForInputMessage();
 
             Assert.Pass("Success");
         }
@@ -63,7 +63,7 @@ namespace RPSLSGAMETESTS
         {
             GameBoard game = new GameBoard();
 
-            game.SetGameAvailableItems();
+            game.WriteGameAvailableItems();
 
             Assert.Pass("Success");
         }
@@ -142,7 +142,7 @@ namespace RPSLSGAMETESTS
         {
             GameBoard game = new GameBoard();
 
-            game.SetGameItemsEqualMessage();
+            game.WriteGameItemsEqualMessage();
 
             Assert.Pass("Success");
         }
@@ -277,7 +277,7 @@ namespace RPSLSGAMETESTS
         {
             GameBoard game = new GameBoard();
 
-            game.SetGameFinalizeMenuNavigationMessage();
+            game.WriteGameFinalizeMenuNavigationMessage();
 
             Assert.Pass("Success");
         }

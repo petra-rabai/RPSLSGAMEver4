@@ -44,7 +44,7 @@ namespace RPSLSGAMETESTS
         {
             Player player = new Player();
 
-            player.SetPlayerWaitForMessage();
+            player.WritePlayerWaitForMessage();
 
             Assert.Pass("Success");
         }
@@ -54,7 +54,7 @@ namespace RPSLSGAMETESTS
         {
             Player player = new Player();
 
-            player.SetPlayerNameMessage();
+            player.WritePlayerNameMessage();
 
             Assert.Pass("Success");
         }

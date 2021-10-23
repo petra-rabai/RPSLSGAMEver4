@@ -9,25 +9,7 @@ namespace RPSLSGAMEver4
 {
     public class GameBoard
     {
-        public Dictionary<char, string> GameMenu { get => gameMenu; set => gameMenu = value; }
-        public Dictionary<char, string> GameItems { get => gameItems; set => gameItems = value; }
-        public bool GameDirectoryExists { get => gameDirectoryExists; set => gameDirectoryExists = value; }
-        public string GameResultDirectory { get => gameResultDirectory; set => gameResultDirectory = value; }
-        public string GameResult { get => gameResult; set => gameResult = value; }
-        public string GameResultTimeStamp { get => gameResultTimeStamp; set => gameResultTimeStamp = value; }
-        public Tuple<string, string> GameCompareChoosedItems { get => gameCompareChoosedItems; set => gameCompareChoosedItems = value; }
-        public Dictionary<Tuple<string, string>, string> GameWinner { get => gameWinner; set => gameWinner = value; }
-
-        private string gameResultTimeStamp = DateTime.Now.ToString("\n MM/dd/yyyy h:mm tt\n");
-
-        private bool gameDirectoryExists;
-
-        private string gameResult = "";
-
-        private string gameResultDirectory = Properties.Settings.Default.FolderPath;
-
-        public string gameResultFullPath = "";
-        private Dictionary<char, string> gameMenu = new Dictionary<char, string>
+        public Dictionary<char, string> GameMenu { get; set; } = new Dictionary<char, string>
         {
             ['E'] = "Start the Game",
             ['H'] = "Game Help",
@@ -35,8 +17,7 @@ namespace RPSLSGAMEver4
             ['C'] = "Save the Result",
             ['Q'] = "Quit the Game"
         };
-
-        private Dictionary<char, string> gameItems = new Dictionary<char, string>
+        public Dictionary<char, string> GameItems { get; set; } = new Dictionary<char, string>
         {
             ['P'] = "Paper",
             ['S'] = "Scissor",
@@ -45,18 +26,20 @@ namespace RPSLSGAMEver4
             ['L'] = "Lizard"
 
         };
+        public bool GameDirectoryExists { get; set; }
+        public string GameResultDirectory { get; set; } = Properties.Settings.Default.FolderPath;
+        public string GameResult { get; set; } = "";
+        public string GameResultTimeStamp { get; set; } = DateTime.Now.ToString("\n MM/dd/yyyy h:mm tt\n");
+        public Tuple<string, string> GameCompareChoosedItems { get; set; }
+        public Dictionary<Tuple<string, string>, string> GameWinner { get; set; } = new Dictionary<Tuple<string, string>, string>();
 
-        private Tuple<string, string> gameCompareChoosedItems;
-
-        private Dictionary<Tuple<string, string>, string> gameWinner = new Dictionary<Tuple<string, string>, string>();
+        public string gameResultFullPath = "";
 
         public void GameWelcomeScreenInitialize(Player player, Machine machine, GameBoard game)
         {
             SetGameTitle();
-            SetGameWelcomeMessage();
-            SetPlayerWaitForInputMessage();
-            SetPlayerKey(player,game);
-            GameMenuNavigation(player,machine,game);
+            WriteGameWelcomeMessage();
+            WritePlayerWaitForInputMessage(); 
         }
 
         public void SetGameTitle()
@@ -64,12 +47,12 @@ namespace RPSLSGAMEver4
             Console.Title = Properties.Resources.gameTitle;
         }
 
-        public void SetGameWelcomeMessage()
+        public void WriteGameWelcomeMessage()
         {
             Console.WriteLine(Properties.Resources.gameWelcomeMessage);
         }
 
-        public void SetPlayerWaitForInputMessage()
+        public void WritePlayerWaitForInputMessage()
         {
             Console.WriteLine(Properties.Resources.playerWaitForInputMessage);
         }
@@ -90,7 +73,7 @@ namespace RPSLSGAMEver4
             switch (player.PlayerChoosedGameMenu)
             {
                 case "Start the Game":
-                    GameCore(player,machine,game);
+                    GameStart(player,machine,game);
                     break;
                 case "Game Help":
                     GameHelp(player,machine,game);
@@ -109,23 +92,20 @@ namespace RPSLSGAMEver4
             }
         }
 
-        public void GameCore(Player player, Machine machine, GameBoard game)
+        public void GameStart(Player player, Machine machine, GameBoard game)
         {
-            SetGameAvailableItems();
-            SetPlayerPoint(player);
-            SetMachinePoint(machine);
-            SetPlayerKey(player, game);
-            SetMachineKey(machine, game);
-            SetPlayerGameItem(player, game);
-            SetMachineGameItem(machine, game);
-            GameItemsEqualityCheck(player, machine, game);
-            SetGameCompareItems(player, machine);
-            GameRulesCheck(player, machine, GameCompareChoosedItems.Item1, GameCompareChoosedItems.Item2);
-            GameShowTheResult(player, machine);
-            GameFinalize(player, machine, game);
+            PointsReset(player, machine);
+            WriteGameAvailableItems();
+            WritePlayerWaitForInputMessage();
         }
 
-        public void SetGameAvailableItems()
+        public void PointsReset(Player player, Machine machine)
+        {
+            SetPlayerPoint(player);
+            SetMachinePoint(machine);
+        }
+
+        public void WriteGameAvailableItems()
         {
             Console.WriteLine(Properties.Resources.gameAvailableItems);
         }
@@ -141,7 +121,7 @@ namespace RPSLSGAMEver4
         }
 
         public void SetMachineKey(Machine machine, GameBoard game)
-        {
+        {  
             machine.GetMachineKey(game);
         }
 
@@ -152,6 +132,7 @@ namespace RPSLSGAMEver4
 
         public void SetMachineGameItem(Machine machine, GameBoard game)
         {
+            SetMachineKey(machine, game);
             machine.GetChoosedMachineGameItem(game);
         }
 
@@ -159,16 +140,14 @@ namespace RPSLSGAMEver4
         {
             if (player.PlayerChoosedGameItem == machine.MachineChoosedGameItem)
             {
-                SetGameItemsEqualMessage();
+                WriteGameItemsEqualMessage();
                 SetPlayerInvalidAction(player, game);
-                SetPlayerKey(player, game);
-                SetMachineKey(machine, game);
                 SetPlayerGameItem(player, game);
                 SetMachineGameItem(machine, game);
             }
         }
 
-        public void SetGameItemsEqualMessage()
+        public void WriteGameItemsEqualMessage()
         {
             Console.WriteLine(Properties.Resources.gameItemsEqualMessage);
         }
@@ -180,7 +159,7 @@ namespace RPSLSGAMEver4
 
         public void SetGameCompareItems(Player player, Machine machine)
         {
-            gameCompareChoosedItems = new Tuple<string, string>(player.PlayerChoosedGameItem, machine.MachineChoosedGameItem);
+            GameCompareChoosedItems = new Tuple<string, string>(player.PlayerChoosedGameItem, machine.MachineChoosedGameItem);
         }
 
         public void GameRulesCheck(Player player, Machine machine, string optionOne, string optionTwo)
@@ -188,12 +167,12 @@ namespace RPSLSGAMEver4
 
             if (optionOne == GameCompareChoosedItems.Item1 && optionTwo == GameCompareChoosedItems.Item2)
             {
-                gameWinner.Add(GameCompareChoosedItems, optionOne);
+                GameWinner.Add(GameCompareChoosedItems, optionOne);
                 player.PlayerPoint++;
             }
             else if (optionOne == GameCompareChoosedItems.Item2 && optionTwo == GameCompareChoosedItems.Item1)
             {
-                gameWinner.Add(GameCompareChoosedItems, optionOne);
+                GameWinner.Add(GameCompareChoosedItems, optionOne);
                 machine.MachinePoint++;
             }
         }
@@ -202,18 +181,18 @@ namespace RPSLSGAMEver4
         {
             if (player.PlayerPoint > machine.MachinePoint)
             {
-                SetPlayerWinMessage(player, machine);
+                WritePlayerWinMessage(player, machine);
             }
             else
             {
-                SetMachineWinMessage(player, machine);
+                WriteMachineWinMessage(player, machine);
             }
         }
 
-        public void SetPlayerWinMessage(Player player, Machine machine)
+        public void WritePlayerWinMessage(Player player, Machine machine)
         {
             Console.WriteLine(Properties.Resources.playerWinMessage
-                                              + gameWinner[GameCompareChoosedItems]
+                                              + GameWinner[GameCompareChoosedItems]
                                               + Properties.Resources.playerPointMessage
                                               + player.PlayerPoint
                                               + Properties.Resources.playerChoosedOptionMessage
@@ -222,10 +201,10 @@ namespace RPSLSGAMEver4
                                               + machine.MachineChoosedGameItem);
         }
 
-        public void SetMachineWinMessage(Player player, Machine machine)
+        public void WriteMachineWinMessage(Player player, Machine machine)
         {
             Console.WriteLine(Properties.Resources.playerLoseMessage
-                                              + gameWinner[GameCompareChoosedItems]
+                                              + GameWinner[GameCompareChoosedItems]
                                               + Properties.Resources.machinePointMessage
                                               + machine.MachinePoint
                                               + Properties.Resources.playerChoosedOptionMessage
@@ -234,15 +213,7 @@ namespace RPSLSGAMEver4
                                               + machine.MachineChoosedGameItem);
         }
 
-        public void GameFinalize(Player player, Machine machine, GameBoard game)
-        {
-            SetGameFinalizeMenuNavigationMessage();
-            SetPlayerWaitForInputMessage();
-            SetPlayerKey(player, game);
-            GameMenuNavigation(player, machine, game);
-        }
-
-        public void SetGameFinalizeMenuNavigationMessage()
+        public void WriteGameFinalizeMenuNavigationMessage()
         {
             Console.WriteLine(Properties.Resources.playerGameFinalizeNavigationMessage);
         }
@@ -289,7 +260,7 @@ namespace RPSLSGAMEver4
         public void GameHelp(Player player,Machine machine, GameBoard game)
         {
             SetGameRulesMessage();
-            SetPlayerWaitForInputMessage();
+            WritePlayerWaitForInputMessage();
             SetPlayerKey(player,game);
             SetChoosedPlayerMenu(player,game);
             GameMenuNavigation(player,machine,game);

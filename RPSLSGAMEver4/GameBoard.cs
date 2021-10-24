@@ -35,19 +35,18 @@ namespace RPSLSGAMEver4
         public Dictionary<Tuple<string, string>, string> GameWinner { get; set; } = new Dictionary<Tuple<string, string>, string>();
 
         public string gameResultFullPath = "";
- 
+
+        public void GameInitialize(Player player, Machine machine, GameBoard game)
+        {
+            GameWelcomeScreenInitialize();
+            PlayerSelectGameMenuItem(player, machine, game);
+        }
 
         public void GameWelcomeScreenInitialize()
         {
             SetGameTitle();
             WriteGameWelcomeMessage();
             WritePlayerWaitForInputMessage(); 
-        }
-
-        public void GameInitialize(Player player, Machine machine, GameBoard game)
-        {
-            GameWelcomeScreenInitialize();
-            PlayerSelectGameMenuItem(player,machine,game);
         }
 
         public void SetGameTitle()
@@ -107,6 +106,13 @@ namespace RPSLSGAMEver4
             GameFinalize(player, machine, game);
         }
 
+        public void GameStart(Player player, Machine machine, GameBoard game)
+        {
+            PointsReset(player, machine);
+            WriteGameAvailableItems();
+            WritePlayerWaitForInputMessage();
+        }
+
         public void GameCore(Player player,Machine machine,GameBoard game)
         {
             PlayerSelectGameItem(player, game);
@@ -133,12 +139,7 @@ namespace RPSLSGAMEver4
             SetPlayerGameItem(player, game);
         }
 
-        public void GameStart(Player player, Machine machine, GameBoard game)
-        {
-            PointsReset(player, machine);
-            WriteGameAvailableItems();
-            WritePlayerWaitForInputMessage();
-        }
+       
 
         public void PointsReset(Player player, Machine machine)
         {

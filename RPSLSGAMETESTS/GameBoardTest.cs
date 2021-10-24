@@ -12,6 +12,16 @@ namespace RPSLSGAMETESTS
     public class GameBoardTests
     {
         [Test]
+        public void CheckGameWelcomeScreenInitializeSuccess()
+        {
+            GameBoard game = new GameBoard();
+
+            game.GameWelcomeScreenInitialize();
+
+            Assert.Pass("Success");
+        }
+
+        [Test]
         public void CheckSetGameTitleSuccess()
         {
             GameBoard game = new GameBoard();
@@ -56,6 +66,20 @@ namespace RPSLSGAMETESTS
             game.SetChoosedPlayerMenu(player, game);
 
             Assert.AreEqual(testMenu, player.PlayerChoosedGameMenu);
+        }
+
+        [Test]
+
+        public void CheckGameStartSuccess()
+        {
+            Player player = new Player();
+            GameBoard game = new GameBoard();
+            Machine machine = new Machine();
+
+            game.GameStart(player, machine, game);
+
+            Assert.Pass("Success");
+
         }
 
         [Test]
@@ -169,51 +193,24 @@ namespace RPSLSGAMETESTS
         [TestCase("Scissor", "Lizard")]
         [TestCase("Rock", "Lizard")]
         [TestCase("Lizard", "Paper")]
-        [TestCase("Rock", "Paper")]
-        [TestCase("Rock", "Spock")]
-        [TestCase("Paper", "Scissor")]
-        [TestCase("Scissor", "Rock")]
-        [TestCase("Scissor", "Spock")]
-        [TestCase("Spock", "Paper")]
-        [TestCase("Spock", "Lizard")]
-        [TestCase("Lizard", "Scissor")]
-        [TestCase("Lizard", "Rock")]
-        [TestCase("Paper", "Lizard")]
 
         [Test]
-        public void CheckGameRulesPlayerSuccess(string optionOne,
-                                          string optionTwo)
+        public void CheckThePlayerWinnerLogic(string optionOne,string optionTwo)
         {
+            GameBoard game = new GameBoard();
             Player player = new Player();
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
-            var expectedPlayerPoint = 0;
-            var expectedMachinePoint = 0;
+            var expectedplayerWinner = optionOne;
             player.PlayerChoosedGameItem = optionOne;
             machine.MachineChoosedGameItem = optionTwo;
+            game.SetGameCompareItems(player, machine);
+            game.RuleValidator(optionOne,optionTwo);
+            game.GetTheGameWinner(player, machine, optionOne, optionTwo);
+
+            Assert.AreEqual(expectedplayerWinner, game.GameWinner[game.GameCompareChoosedItems]);
             
-            game.SetGameCompareItems(player, machine);
-            optionOne = game.GameCompareChoosedItems.Item1;
-            optionTwo = game.GameCompareChoosedItems.Item2;
-            game.GameRulesCheck(player, machine, optionOne, optionTwo);
-            expectedPlayerPoint = player.PlayerPoint;
-            expectedMachinePoint = machine.MachinePoint;
-
-            Assert.AreEqual(expectedPlayerPoint, player.PlayerPoint);
-            Assert.AreEqual(expectedMachinePoint, machine.MachinePoint);
-            Assert.AreNotEqual(expectedPlayerPoint, expectedMachinePoint);
         }
 
-        [TestCase("Paper", "Rock")]
-        [TestCase("Spock", "Rock")]
-        [TestCase("Scissor", "Paper")]
-        [TestCase("Rock", "Scissor")]
-        [TestCase("Spock", "Scissor")]
-        [TestCase("Paper", "Spock")]
-        [TestCase("Lizard", "Spock")]
-        [TestCase("Scissor", "Lizard")]
-        [TestCase("Rock", "Lizard")]
-        [TestCase("Lizard", "Paper")]
         [TestCase("Rock", "Paper")]
         [TestCase("Rock", "Spock")]
         [TestCase("Paper", "Scissor")]
@@ -226,29 +223,21 @@ namespace RPSLSGAMETESTS
         [TestCase("Paper", "Lizard")]
 
         [Test]
-
-        public void CheckGameRulesMachineSuccess(string optionOne,
-                                          string optionTwo)
+        public void CheckTheMachineWinnerLogic(string optionOne, string optionTwo)
         {
+            GameBoard game = new GameBoard();
             Player player = new Player();
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
-            var expectedPlayerPoint = 0;
-            var expectedMachinePoint = 0;
+            var expectedplayerWinner = optionTwo;
             player.PlayerChoosedGameItem = optionOne;
             machine.MachineChoosedGameItem = optionTwo;
-
             game.SetGameCompareItems(player, machine);
-            optionOne = game.GameCompareChoosedItems.Item1;
-            optionTwo = game.GameCompareChoosedItems.Item2;
-            game.GameRulesCheck(player, machine, optionTwo, optionOne);
-            expectedPlayerPoint = player.PlayerPoint;
-            expectedMachinePoint = machine.MachinePoint;
+            game.RuleValidator(optionOne, optionTwo);
+            game.GetTheGameWinner(player, machine, optionOne, optionTwo);
 
-            Assert.AreEqual(expectedPlayerPoint, player.PlayerPoint);
-            Assert.AreEqual(expectedMachinePoint, machine.MachinePoint);
-            Assert.AreNotEqual(expectedPlayerPoint, expectedMachinePoint);
+            Assert.AreEqual(expectedplayerWinner, game.GameWinner[game.GameCompareChoosedItems]);
         }
+
 
         [TestCase(1, 0)]
         [TestCase(0, 1)]
@@ -324,6 +313,16 @@ namespace RPSLSGAMETESTS
             GameBoard game = new GameBoard();
 
             game.SetGameRulesMessage();
+
+            Assert.Pass("Success");
+        }
+
+        [Test]
+        public void CheckWriteHelpMenuNavigationMessageSuccess()
+        {
+            GameBoard game = new GameBoard();
+
+            game.WriteHelpMenuNavigationMessage();
 
             Assert.Pass("Success");
         }

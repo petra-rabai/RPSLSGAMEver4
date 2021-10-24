@@ -29,17 +29,25 @@ namespace RPSLSGAMEver4
         public bool GameDirectoryExists { get; set; }
         public string GameResultDirectory { get; set; } = Properties.Settings.Default.FolderPath;
         public string GameResult { get; set; } = "";
+        public string winner;
         public string GameResultTimeStamp { get; set; } = DateTime.Now.ToString("\n MM/dd/yyyy h:mm tt\n");
         public Tuple<string, string> GameCompareChoosedItems { get; set; }
         public Dictionary<Tuple<string, string>, string> GameWinner { get; set; } = new Dictionary<Tuple<string, string>, string>();
 
         public string gameResultFullPath = "";
+ 
 
-        public void GameWelcomeScreenInitialize(Player player, Machine machine, GameBoard game)
+        public void GameWelcomeScreenInitialize()
         {
             SetGameTitle();
             WriteGameWelcomeMessage();
             WritePlayerWaitForInputMessage(); 
+        }
+
+        public void GameInitialize(Player player, Machine machine, GameBoard game)
+        {
+            GameWelcomeScreenInitialize();
+            PlayerSelectGameMenuItem(player,machine,game);
         }
 
         public void SetGameTitle()
@@ -73,13 +81,13 @@ namespace RPSLSGAMEver4
             switch (player.PlayerChoosedGameMenu)
             {
                 case "Start the Game":
-                    GameStart(player,machine,game);
+                    Game(player, machine, game);
                     break;
                 case "Game Help":
                     GameHelp(player,machine,game);
                     break;
                 case "Back to the Menu":
-                    GameWelcomeScreenInitialize(player,machine,game);
+                    GameInitialize(player,machine,game);
                     break;
                 case "Save the Result":
                     GameSaveing(player,machine);
@@ -90,6 +98,39 @@ namespace RPSLSGAMEver4
                 default:
                     break;
             }
+        }
+
+        public void Game(Player player, Machine machine, GameBoard game)
+        {
+            GameStart(player, machine, game);
+            GameCore(player, machine, game);
+            GameFinalize(player, machine, game);
+        }
+
+        public void GameCore(Player player,Machine machine,GameBoard game)
+        {
+            PlayerSelectGameItem(player, game);
+            MachineSelectGameItem(machine, game);
+            
+            GameItemsEqualityCheck(player, machine, game);
+
+            SetGameCompareItems(player, machine);
+            RuleValidator(GameCompareChoosedItems.Item1, GameCompareChoosedItems.Item2);
+            GetTheGameWinner(player, machine, GameCompareChoosedItems.Item1, GameCompareChoosedItems.Item2);
+
+            GameShowTheResult(player, machine);
+        }
+
+        public void MachineSelectGameItem(Machine machine, GameBoard game)
+        {
+            SetMachineKey(machine, game);
+            SetMachineGameItem(machine, game);
+        }
+
+        public void PlayerSelectGameItem(Player player, GameBoard game)
+        {
+            SetPlayerKey(player, game);
+            SetPlayerGameItem(player, game);
         }
 
         public void GameStart(Player player, Machine machine, GameBoard game)
@@ -132,7 +173,6 @@ namespace RPSLSGAMEver4
 
         public void SetMachineGameItem(Machine machine, GameBoard game)
         {
-            SetMachineKey(machine, game);
             machine.GetChoosedMachineGameItem(game);
         }
 
@@ -142,8 +182,8 @@ namespace RPSLSGAMEver4
             {
                 WriteGameItemsEqualMessage();
                 SetPlayerInvalidAction(player, game);
-                SetPlayerGameItem(player, game);
-                SetMachineGameItem(machine, game);
+                PlayerSelectGameItem(player, game);
+                MachineSelectGameItem(machine, game);
             }
         }
 
@@ -162,17 +202,152 @@ namespace RPSLSGAMEver4
             GameCompareChoosedItems = new Tuple<string, string>(player.PlayerChoosedGameItem, machine.MachineChoosedGameItem);
         }
 
-        public void GameRulesCheck(Player player, Machine machine, string optionOne, string optionTwo)
+        public string RuleValidator(string optionOne, string optionTwo)
         {
+            ValidateScissorVsPaper(optionOne, optionTwo);
+            ValidateRockVsScissor(optionOne, optionTwo);
+            ValidateRockVsPaper(optionOne, optionTwo);
+            ValidateRockVsLizard(optionOne, optionTwo);
+            ValidateLizardVsSpock(optionOne, optionTwo);
+            ValidateSpockVsScissor(optionOne, optionTwo);
+            ValidateScissorVsLizard(optionOne, optionTwo);
+            ValidatePaperVsLizard(optionOne, optionTwo);
+            ValidateSpockVsPaper(optionOne, optionTwo);
+            ValidateRockVsSpock(optionOne, optionTwo);
 
-            if (optionOne == GameCompareChoosedItems.Item1 && optionTwo == GameCompareChoosedItems.Item2)
+            return winner;
+        }
+
+        public void ValidateRockVsSpock(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Rock" && optionTwo == "Spock")
+            {
+                winner = "Spock";
+            }
+            if (optionOne == "Spock" && optionTwo == "Rock")
+            {
+                winner = "Spock";
+            }
+        }
+
+        public void ValidateSpockVsPaper(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Spock" && optionTwo == "Paper")
+            {
+                winner = "Paper";
+            }
+            if (optionOne == "Paper" && optionTwo == "Spock")
+            {
+                winner = "Paper";
+            }
+        }
+
+        public void ValidatePaperVsLizard(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Lizard" && optionTwo == "Paper")
+            {
+                winner = "Lizard";
+            }
+            if (optionOne == "Paper" && optionTwo == "Lizard")
+            {
+                winner = "Lizard";
+            }
+        }
+
+        public void ValidateScissorVsLizard(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Scissor" && optionTwo == "Lizard")
+            {
+                winner = "Scissor";
+            }
+            if (optionOne == "Lizard" && optionTwo == "Scissor")
+            {
+                winner = "Scissor";
+            }
+        }
+
+        public void ValidateSpockVsScissor(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Spock" && optionTwo == "Scissor")
+            {
+                winner = "Spock";
+            }
+            if (optionOne == "Scissor" && optionTwo == "Spock")
+            {
+                winner = "Spock";
+            }
+        }
+
+        public void ValidateLizardVsSpock(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Lizard" && optionTwo == "Spock")
+            {
+                winner = "Lizard";
+            }
+            if (optionOne == "Spock" && optionTwo == "Lizard")
+            {
+                winner = "Lizard";
+            }
+        }
+
+        public void ValidateRockVsLizard(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Rock" && optionTwo == "Lizard")
+            {
+                winner = "Rock";
+            }
+            if (optionOne == "Lizard" && optionTwo == "Rock")
+            {
+                winner = "Rock";
+            }
+        }
+
+        public void ValidateRockVsPaper(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Rock" && optionTwo == "Paper")
+            {
+                winner = "Paper";
+            }
+            if (optionOne == "Paper" && optionTwo == "Rock")
+            {
+                winner = "Paper";
+            }
+        }
+
+        public void ValidateRockVsScissor(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Rock" && optionTwo == "Scissor")
+            {
+                winner = "Rock";
+            }
+            if (optionOne == "Scissor" && optionTwo == "Rock")
+            {
+                winner = "Rock";
+            }
+        }
+
+        public void ValidateScissorVsPaper(string optionOne, string optionTwo)
+        {
+            if (optionOne == "Scissor" && optionTwo == "Paper")
+            {
+                winner = "Scissor";
+            }
+            if (optionOne == "Paper" && optionTwo == "Scissor")
+            {
+                winner = "Scissor";
+            }
+        }
+
+        public void GetTheGameWinner(Player player, Machine machine, string optionOne, string optionTwo)
+        {
+            if (optionOne == winner)
             {
                 GameWinner.Add(GameCompareChoosedItems, optionOne);
                 player.PlayerPoint++;
             }
-            else if (optionOne == GameCompareChoosedItems.Item2 && optionTwo == GameCompareChoosedItems.Item1)
+            if (optionTwo == winner)
             {
-                GameWinner.Add(GameCompareChoosedItems, optionOne);
+                GameWinner.Add(GameCompareChoosedItems, optionTwo);
                 machine.MachinePoint++;
             }
         }
@@ -260,15 +435,33 @@ namespace RPSLSGAMEver4
         public void GameHelp(Player player,Machine machine, GameBoard game)
         {
             SetGameRulesMessage();
+            WriteHelpMenuNavigationMessage();
             WritePlayerWaitForInputMessage();
-            SetPlayerKey(player,game);
-            SetChoosedPlayerMenu(player,game);
-            GameMenuNavigation(player,machine,game);
+            PlayerSelectGameMenuItem(player, machine, game);
+        }
+
+        public void WriteHelpMenuNavigationMessage()
+        {
+            Console.WriteLine(Properties.Resources.playerGameRulesNavigationMessage);
         }
 
         public void SetGameRulesMessage()
         {
             Console.WriteLine(Properties.Resources.gameRulesMessage);
+        }
+
+        public void GameFinalize(Player player, Machine machine, GameBoard game)
+        {
+            WriteGameFinalizeMenuNavigationMessage();
+            WritePlayerWaitForInputMessage();
+            PlayerSelectGameMenuItem(player, machine, game);
+        }
+
+        public void PlayerSelectGameMenuItem(Player player, Machine machine, GameBoard game)
+        {
+            SetPlayerKey(player, game);
+            SetChoosedPlayerMenu(player, game);
+            GameMenuNavigation(player, machine, game);
         }
 
         public void GameExit()

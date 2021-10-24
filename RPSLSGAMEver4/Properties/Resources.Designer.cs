@@ -66,7 +66,8 @@ namespace RPSLSGAMEver4.Properties {
         ///Scissor - S
         ///Rock - R
         ///Lizard - L
-        ///Spock -V.
+        ///Spock -V
+        ///.
         /// </summary>
         public static string gameAvailableItems {
             get {
@@ -85,7 +86,18 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Game rules: \nScissors cuts Paper\nPaper covers Rock\nRock crushes Lizard\nLizard poisons Spock\nSpock smashes Scissors\nScissors decapitates Lizard\nLizard eats Paper\nPaper disproves Spock\nSpock vaporizes Rock\nRock crushes Scissors\n.
+        ///   Looks up a localized string similar to The Game rules: 
+        ///Scissors cuts Paper
+        ///Paper covers Rock
+        ///Rock crushes Lizard
+        ///Lizard poisons Spock
+        ///Spock smashes Scissors
+        ///Scissors decapitates Lizard
+        ///Lizard eats Paper
+        ///Paper disproves Spock
+        ///Spock vaporizes Rock
+        ///Rock crushes Scissors
+        ///.
         /// </summary>
         public static string gameRulesMessage {
             get {
@@ -112,7 +124,11 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to the RPSLS Game\nRock, Paper, Scissor, Lizard, Spock\nIf you need to read the game rules hit the H key\nHit the E key to start the game or hit the Q key to quit the game\n&quot;.
+        ///   Looks up a localized string similar to Welcome to the RPSLS Game
+        ///Rock, Paper, Scissor, Lizard, Spock
+        ///If you need to read the game rules hit the H key
+        ///Hit the E key to start the game or hit the Q key to quit the game
+        ///.
         /// </summary>
         public static string gameWelcomeMessage {
             get {
@@ -121,7 +137,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nThe machine choosed:.
+        ///   Looks up a localized string similar to The machine choosed:
+        ///.
         /// </summary>
         public static string machineChoosedOtionMessage {
             get {
@@ -130,7 +147,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nMachine point:.
+        ///   Looks up a localized string similar to Machine point:
+        ///.
         /// </summary>
         public static string machinePointMessage {
             get {
@@ -139,7 +157,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add your name: .
+        ///   Looks up a localized string similar to Add your name: 
+        ///.
         /// </summary>
         public static string playerAddNameMessage {
             get {
@@ -148,7 +167,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nYou are choosed:.
+        ///   Looks up a localized string similar to You are choosed:
+        ///.
         /// </summary>
         public static string playerChoosedOptionMessage {
             get {
@@ -157,7 +177,10 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nIf you want to save the result hit the C key\nIf you want to start a new game without save the result hit the E key\nIf you want to exit the game without save hit the Q key\n.
+        ///   Looks up a localized string similar to If you want to save the result hit the C key
+        ///If you want to start a new game without save the result hit the E key
+        ///If you want to exit the game without save hit the Q key
+        ///.
         /// </summary>
         public static string playerGameFinalizeNavigationMessage {
             get {
@@ -166,7 +189,9 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you want to go back to the main screen hit the B key\n If you want to quit the game hit the Q key\n.
+        ///   Looks up a localized string similar to If you want to go back to the main screen hit the B key
+        ///If you want to quit the game hit the Q key
+        ///.
         /// </summary>
         public static string playerGameRulesNavigationMessage {
             get {
@@ -175,7 +200,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nPlease hit a valid key: \n.
+        ///   Looks up a localized string similar to Please hit a valid key: 
+        ///.
         /// </summary>
         public static string playerHitValidKeyMessage {
             get {
@@ -184,7 +210,9 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are LOSE! :(\nThe winner is:.
+        ///   Looks up a localized string similar to You are LOSE! :(
+        ///The winner is:
+        ///.
         /// </summary>
         public static string playerLoseMessage {
             get {
@@ -193,7 +221,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nPlayer name:.
+        ///   Looks up a localized string similar to Player name:
+        ///.
         /// </summary>
         public static string playerNameMessage {
             get {
@@ -202,7 +231,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nPlayer point:.
+        ///   Looks up a localized string similar to Player point:
+        ///.
         /// </summary>
         public static string playerPointMessage {
             get {
@@ -211,7 +241,8 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nWait for player input: .
+        ///   Looks up a localized string similar to Wait for player input: 
+        ///.
         /// </summary>
         public static string playerWaitForInputMessage {
             get {
@@ -220,7 +251,9 @@ namespace RPSLSGAMEver4.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are WIN! :)\nThe winner is:.
+        ///   Looks up a localized string similar to You are WIN! :)
+        ///The winner is:
+        ///.
         /// </summary>
         public static string playerWinMessage {
             get {

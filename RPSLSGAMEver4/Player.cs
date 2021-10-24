@@ -16,7 +16,6 @@ namespace RPSLSGAMEver4
 
         public char GetPlayerKey(GameBoard game)
         {
-            WritePlayerWaitForMessage();
             ReadKeyboard();
             while ((!game.GameMenu.ContainsKey(PlayerPressedkey)) && (!game.GameItems.ContainsKey(PlayerPressedkey)))
             {

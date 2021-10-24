@@ -123,14 +123,26 @@ Paper - P
 Scissor - S
 Rock - R
 Lizard - L
-Spock -V</value>
+Spock -V
+</value>
   </data>
   <data name="gameItemsEqualMessage" xml:space="preserve">
     <value>Both identities are equal
 </value>
   </data>
   <data name="gameRulesMessage" xml:space="preserve">
-    <value>The Game rules: \nScissors cuts Paper\nPaper covers Rock\nRock crushes Lizard\nLizard poisons Spock\nSpock smashes Scissors\nScissors decapitates Lizard\nLizard eats Paper\nPaper disproves Spock\nSpock vaporizes Rock\nRock crushes Scissors\n</value>
+    <value>The Game rules: 
+Scissors cuts Paper
+Paper covers Rock
+Rock crushes Lizard
+Lizard poisons Spock
+Spock smashes Scissors
+Scissors decapitates Lizard
+Lizard eats Paper
+Paper disproves Spock
+Spock vaporizes Rock
+Rock crushes Scissors
+</value>
   </data>
   <data name="gameSavedDataFileName" xml:space="preserve">
     <value>GameResult.txt</value>
@@ -139,42 +151,63 @@ Spock -V</value>
     <value>RPSLS GAME</value>
   </data>
   <data name="gameWelcomeMessage" xml:space="preserve">
-    <value>Welcome to the RPSLS Game\nRock, Paper, Scissor, Lizard, Spock\nIf you need to read the game rules hit the H key\nHit the E key to start the game or hit the Q key to quit the game\n"</value>
+    <value>Welcome to the RPSLS Game
+Rock, Paper, Scissor, Lizard, Spock
+If you need to read the game rules hit the H key
+Hit the E key to start the game or hit the Q key to quit the game
+</value>
   </data>
   <data name="machineChoosedOtionMessage" xml:space="preserve">
-    <value>\nThe machine choosed:</value>
+    <value>The machine choosed:
+</value>
   </data>
   <data name="machinePointMessage" xml:space="preserve">
-    <value>\nMachine point:</value>
+    <value>Machine point:
+</value>
   </data>
   <data name="playerAddNameMessage" xml:space="preserve">
-    <value>Add your name: </value>
+    <value>Add your name: 
+</value>
   </data>
   <data name="playerChoosedOptionMessage" xml:space="preserve">
-    <value>\nYou are choosed:</value>
+    <value>You are choosed:
+</value>
   </data>
   <data name="playerGameFinalizeNavigationMessage" xml:space="preserve">
-    <value>\nIf you want to save the result hit the C key\nIf you want to start a new game without save the result hit the E key\nIf you want to exit the game without save hit the Q key\n</value>
+    <value>If you want to save the result hit the C key
+If you want to start a new game without save the result hit the E key
+If you want to exit the game without save hit the Q key
+</value>
   </data>
   <data name="playerGameRulesNavigationMessage" xml:space="preserve">
-    <value>If you want to go back to the main screen hit the B key\n If you want to quit the game hit the Q key\n</value>
+    <value>If you want to go back to the main screen hit the B key
+If you want to quit the game hit the Q key
+</value>
   </data>
   <data name="playerHitValidKeyMessage" xml:space="preserve">
-    <value>\nPlease hit a valid key: \n</value>
+    <value>Please hit a valid key: 
+</value>
   </data>
   <data name="playerLoseMessage" xml:space="preserve">
-    <value>You are LOSE! :(\nThe winner is:</value>
+    <value>You are LOSE! :(
+The winner is:
+</value>
   </data>
   <data name="playerNameMessage" xml:space="preserve">
-    <value>\nPlayer name:</value>
+    <value>Player name:
+</value>
   </data>
   <data name="playerPointMessage" xml:space="preserve">
-    <value>\nPlayer point:</value>
+    <value>Player point:
+</value>
   </data>
   <data name="playerWaitForInputMessage" xml:space="preserve">
-    <value>\nWait for player input: </value>
+    <value>Wait for player input: 
+</value>
   </data>
   <data name="playerWinMessage" xml:space="preserve">
-    <value>You are WIN! :)\nThe winner is:</value>
+    <value>You are WIN! :)
+The winner is:
+</value>
   </data>
 </root>

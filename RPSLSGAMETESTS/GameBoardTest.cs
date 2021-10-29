@@ -15,7 +15,6 @@ namespace RPSLSGAMETESTS
         public void CheckGameWelcomeScreenInitializeSuccess()
         {
             GameBoard game = new GameBoard();
-
             game.GameWelcomeScreenInitialize();
 
             Assert.Pass("Success");

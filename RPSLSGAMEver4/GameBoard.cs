@@ -29,10 +29,10 @@ namespace RPSLSGAMEver4
         public bool GameDirectoryExists { get; set; }
         public string GameResultDirectory { get; set; } = Properties.Settings.Default.FolderPath;
         public string GameResult { get; set; } = "";
-        public string winner;
         public string GameResultTimeStamp { get; set; } = DateTime.Now.ToString("\n MM/dd/yyyy h:mm tt\n");
         public Tuple<string, string> GameCompareChoosedItems { get; set; }
         public Dictionary<Tuple<string, string>, string> GameWinner { get; set; } = new Dictionary<Tuple<string, string>, string>();
+        public string Winner { get; set; }
 
         public string gameResultFullPath = "";
 
@@ -205,6 +205,7 @@ namespace RPSLSGAMEver4
 
         public string RuleValidator(string optionOne, string optionTwo)
         {
+
             ValidateScissorVsPaper(optionOne, optionTwo);
             ValidateRockVsScissor(optionOne, optionTwo);
             ValidateRockVsPaper(optionOne, optionTwo);
@@ -216,18 +217,18 @@ namespace RPSLSGAMEver4
             ValidateSpockVsPaper(optionOne, optionTwo);
             ValidateRockVsSpock(optionOne, optionTwo);
 
-            return winner;
+            return Winner;
         }
 
         public void ValidateRockVsSpock(string optionOne, string optionTwo)
         {
             if (optionOne == "Rock" && optionTwo == "Spock")
             {
-                winner = "Spock";
+                Winner = "Spock";
             }
             if (optionOne == "Spock" && optionTwo == "Rock")
             {
-                winner = "Spock";
+                Winner = "Spock";
             }
         }
 
@@ -235,11 +236,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Spock" && optionTwo == "Paper")
             {
-                winner = "Paper";
+                Winner = "Paper";
             }
             if (optionOne == "Paper" && optionTwo == "Spock")
             {
-                winner = "Paper";
+                Winner = "Paper";
             }
         }
 
@@ -247,11 +248,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Lizard" && optionTwo == "Paper")
             {
-                winner = "Lizard";
+                Winner = "Lizard";
             }
             if (optionOne == "Paper" && optionTwo == "Lizard")
             {
-                winner = "Lizard";
+                Winner = "Lizard";
             }
         }
 
@@ -259,11 +260,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Scissor" && optionTwo == "Lizard")
             {
-                winner = "Scissor";
+                Winner = "Scissor";
             }
             if (optionOne == "Lizard" && optionTwo == "Scissor")
             {
-                winner = "Scissor";
+                Winner = "Scissor";
             }
         }
 
@@ -271,11 +272,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Spock" && optionTwo == "Scissor")
             {
-                winner = "Spock";
+                Winner = "Spock";
             }
             if (optionOne == "Scissor" && optionTwo == "Spock")
             {
-                winner = "Spock";
+                Winner = "Spock";
             }
         }
 
@@ -283,11 +284,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Lizard" && optionTwo == "Spock")
             {
-                winner = "Lizard";
+                Winner = "Lizard";
             }
             if (optionOne == "Spock" && optionTwo == "Lizard")
             {
-                winner = "Lizard";
+                Winner = "Lizard";
             }
         }
 
@@ -295,11 +296,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Rock" && optionTwo == "Lizard")
             {
-                winner = "Rock";
+                Winner = "Rock";
             }
             if (optionOne == "Lizard" && optionTwo == "Rock")
             {
-                winner = "Rock";
+                Winner = "Rock";
             }
         }
 
@@ -307,11 +308,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Rock" && optionTwo == "Paper")
             {
-                winner = "Paper";
+                Winner = "Paper";
             }
             if (optionOne == "Paper" && optionTwo == "Rock")
             {
-                winner = "Paper";
+                Winner = "Paper";
             }
         }
 
@@ -319,11 +320,11 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Rock" && optionTwo == "Scissor")
             {
-                winner = "Rock";
+                Winner = "Rock";
             }
             if (optionOne == "Scissor" && optionTwo == "Rock")
             {
-                winner = "Rock";
+                Winner = "Rock";
             }
         }
 
@@ -331,22 +332,22 @@ namespace RPSLSGAMEver4
         {
             if (optionOne == "Scissor" && optionTwo == "Paper")
             {
-                winner = "Scissor";
+                Winner = "Scissor";
             }
             if (optionOne == "Paper" && optionTwo == "Scissor")
             {
-                winner = "Scissor";
+                Winner = "Scissor";
             }
         }
 
         public void GetTheGameWinner(Player player, Machine machine, string optionOne, string optionTwo)
         {
-            if (optionOne == winner)
+            if (optionOne == Winner)
             {
                 GameWinner.Add(GameCompareChoosedItems, optionOne);
                 player.PlayerPoint++;
             }
-            if (optionTwo == winner)
+            if (optionTwo == Winner)
             {
                 GameWinner.Add(GameCompareChoosedItems, optionTwo);
                 machine.MachinePoint++;

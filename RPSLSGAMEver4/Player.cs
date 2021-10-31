@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPSLSGAMEver4
 {
-    public class Player
+    public class Player : IPlayer
     {
         public string PlayerName { get; set; }
         public string PlayerChoosedGameMenu { get; set; }
@@ -14,7 +11,7 @@ namespace RPSLSGAMEver4
         public string PlayerChoosedGameItem { get; set; }
         public int PlayerPoint { get; set; }
 
-        public char GetPlayerKey(GameBoard game)
+        public char GetPlayerKey(Board game)
         {
             ReadKeyboard();
             while ((!game.GameMenu.ContainsKey(PlayerPressedkey)) && (!game.GameItems.ContainsKey(PlayerPressedkey)))
@@ -58,11 +55,11 @@ namespace RPSLSGAMEver4
 
         public void ReadKeyboard()
         {
-            ConsoleKeyInfo Hitkey = Console.ReadKey();
-            PlayerPressedkey = Char.Parse(Hitkey.Key.ToString());
+            ConsoleKeyInfo hitkey = Console.ReadKey();
+            PlayerPressedkey = Char.Parse(hitkey.Key.ToString());
         }
 
-        public void NotifyPalyerToAnInvalidAction(GameBoard game)
+        public void NotifyPalyerToAnInvalidAction(Board game)
         {
             Console.WriteLine(Properties.Resources.playerHitValidKeyMessage);
 
@@ -78,13 +75,13 @@ namespace RPSLSGAMEver4
             WritePlayerWaitForMessage();
         }
 
-        public string GetChoosedPlayerMenu(GameBoard game)
+        public string GetChoosedPlayerMenu(Board game)
         {
             PlayerChoosedGameMenu = game.GameMenu[PlayerPressedkey];
             return PlayerChoosedGameMenu;
         }
 
-        public string GetChoosedPlayerGameItem(GameBoard game)
+        public string GetChoosedPlayerGameItem(Board game)
         {
             PlayerChoosedGameItem = game.GameItems[PlayerPressedkey];
             return PlayerChoosedGameItem;

@@ -14,7 +14,7 @@ namespace RPSLSGAMETESTS
         public void CheckPlayerChoosedFromMenuCollectionSuccess(char testKey, string testMenu)
         {
             Player player = new Player();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             player.PlayerPressedkey = testKey;
             player.GetChoosedPlayerMenu(game);
@@ -31,7 +31,7 @@ namespace RPSLSGAMETESTS
         public void CheckPlayerChoosedFromGameCollectionSuccess(char testKey, string testGameItem)
         {
             Player player = new Player();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             player.PlayerPressedkey = testKey;
             player.GetChoosedPlayerGameItem(game);
@@ -63,7 +63,7 @@ namespace RPSLSGAMETESTS
         public void CheckNotifyPalyerToAnInvalidActionSuccess()
         {
             Player player = new Player();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             player.NotifyPalyerToAnInvalidAction(game);
 

@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using RPSLSGAMEver4;
+using RPSLSGAMEver4.Properties;
 
 namespace RPSLSGAMETESTS
 {
-    public class GameBoardTests
+    public class BoardTests
     {
         [Test]
         public void CheckGameWelcomeScreenInitializeSuccess()
         {
-            GameBoard game = new GameBoard();
-            game.GameWelcomeScreenInitialize();
+            Board game = new Board();
+            var expectedGameTitle = Resources.gameTitle;
 
-            Assert.Pass("Success");
+            game.WelcomeScreenInitialize();
+
+            Assert.AreEqual(expectedGameTitle,Resources.gameTitle);
+
         }
 
         [Test]
         public void CheckSetGameTitleSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.SetGameTitle();
 
@@ -33,7 +34,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckSetGameWelcomeMessageSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.WriteGameWelcomeMessage();
 
@@ -43,7 +44,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckSetPlayerWaitForInputMessageSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.WritePlayerWaitForInputMessage();
 
@@ -59,7 +60,7 @@ namespace RPSLSGAMETESTS
         public void CheckSetChoosedPlayerMenuSuccess(char testKey, string testMenu)
         {
             Player player = new Player();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             player.PlayerPressedkey = testKey;
             game.SetChoosedPlayerMenu(player, game);
@@ -72,10 +73,10 @@ namespace RPSLSGAMETESTS
         public void CheckGameStartSuccess()
         {
             Player player = new Player();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             Machine machine = new Machine();
 
-            game.GameStart(player, machine, game);
+            game.Start(player, machine, game);
 
             Assert.Pass("Success");
 
@@ -84,7 +85,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckSetGameAvailableItemsSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.WriteGameAvailableItems();
 
@@ -96,7 +97,7 @@ namespace RPSLSGAMETESTS
         public void CheckSetPlayerPointSuccess(int testPoint)
         {
             Player player = new Player();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             
             game.SetPlayerPoint(player);
             
@@ -108,7 +109,7 @@ namespace RPSLSGAMETESTS
         public void CheckSetMachinePointSuccess(int testPoint)
         {
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.SetMachinePoint(machine);
 
@@ -119,7 +120,7 @@ namespace RPSLSGAMETESTS
         public void CheckSetMachineKeySuccess()
         {
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.SetMachineKey(machine, game);
 
@@ -135,7 +136,7 @@ namespace RPSLSGAMETESTS
         public void CheckSetPlayerGameItemSuccess(char testKey, string testGameItem)
         {
             Player player = new Player();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             player.PlayerPressedkey = testKey;
 
             game.SetPlayerGameItem(player, game);
@@ -152,7 +153,7 @@ namespace RPSLSGAMETESTS
         public void CheckSetMachineGameItemSuccess(char testKey, string testGameItem)
         {
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             machine.MachinePressedkey = testKey;
 
             game.SetMachineGameItem(machine, game);
@@ -163,7 +164,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckSetGameItemsEqualMessageSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.WriteGameItemsEqualMessage();
 
@@ -174,7 +175,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckSetPlayerInvalidActionSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             Player player = new Player();
 
             game.SetPlayerInvalidAction(player, game);
@@ -196,7 +197,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckThePlayerWinnerLogic(string optionOne,string optionTwo)
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             Player player = new Player();
             Machine machine = new Machine();
             var expectedplayerWinner = optionOne;
@@ -224,7 +225,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckTheMachineWinnerLogic(string optionOne, string optionTwo)
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             Player player = new Player();
             Machine machine = new Machine();
             var expectedplayerWinner = optionTwo;
@@ -245,7 +246,7 @@ namespace RPSLSGAMETESTS
         {
             Player player = new Player();
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             Tuple<string, string> testCompareChoosedItems = new Tuple<string, string>("Scissor", "Paper");
             Dictionary<Tuple<string, string>, string> testWinner = new Dictionary<Tuple<string, string>, string>();
 
@@ -257,13 +258,13 @@ namespace RPSLSGAMETESTS
             game.GameWinner[game.GameCompareChoosedItems] = testWinner[testCompareChoosedItems];
             player.PlayerPoint = expectedPlayerPoint;
             machine.MachinePoint = expectedMachinePoint;
-            game.GameShowTheResult(player, machine);
+            game.ShowTheResult(player, machine);
         }
 
         [Test]
         public void CheckSetGameFinalizeMenuNavigationMessageSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.WriteGameFinalizeMenuNavigationMessage();
 
@@ -274,10 +275,10 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckCreateGameResultDirectorySuccess(string expectedGameDirectory)
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.GameResultDirectory = expectedGameDirectory;
-            game.GameCheckSaveDirectoryExsits();
+            game.CheckSaveDirectoryExsits();
 
             DirectoryAssert.Exists(expectedGameDirectory);
             Directory.Delete(expectedGameDirectory);
@@ -288,7 +289,7 @@ namespace RPSLSGAMETESTS
         {
             Player player = new Player();
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
             var expectedFileName = "";
             var expectedFileData = "";
             player.PlayerName = "Test";
@@ -298,7 +299,7 @@ namespace RPSLSGAMETESTS
             machine.MachineChoosedGameItem = "Scissor";
             
             game.SaveTheResultToFile(player, machine);
-            expectedFileName = game.gameResultFullPath;
+            expectedFileName = game.ResultFullPath;
             expectedFileData = game.GameResult;
 
             DirectoryAssert.Exists(game.GameResultDirectory);
@@ -309,7 +310,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckSetGameRulesMessageSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.SetGameRulesMessage();
 
@@ -319,7 +320,7 @@ namespace RPSLSGAMETESTS
         [Test]
         public void CheckWriteHelpMenuNavigationMessageSuccess()
         {
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             game.WriteHelpMenuNavigationMessage();
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RPSLSGAMEver4;
+﻿using RPSLSGAMEver4;
 using NUnit.Framework;
 
 namespace RPSLSGAMETESTS
@@ -14,7 +9,7 @@ namespace RPSLSGAMETESTS
         public void CheckGetMachineKeySuccess()
         {
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             machine.GetMachineKey(game);
 
@@ -31,7 +26,7 @@ namespace RPSLSGAMETESTS
         public void CheckMachineChoosedFromGameCollectionSuccess(char testKey, string testGameItem)
         {
             Machine machine = new Machine();
-            GameBoard game = new GameBoard();
+            Board game = new Board();
 
             machine.MachinePressedkey = testKey;
             machine.GetChoosedMachineGameItem(game);

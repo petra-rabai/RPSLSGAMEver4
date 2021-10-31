@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameBoard.cs" />
+    <Compile Include="IBoard.cs" />
+    <Compile Include="IMachine.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
